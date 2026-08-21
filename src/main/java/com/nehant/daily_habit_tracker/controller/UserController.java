@@ -21,6 +21,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
 
+        System.out.println("CONTROLLER USERNAME: " + user.getUsername());
+        System.out.println("CONTROLLER EMAIL: " + user.getEmail());
+        System.out.println("CONTROLLER PASSWORD: " +
+                (user.getPassword() == null ? "NULL" : "RECEIVED"));
+
         User savedUser = userService.createUser(user);
 
         return ResponseEntity
