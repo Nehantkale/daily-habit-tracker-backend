@@ -26,6 +26,11 @@ public class UserService {
 
     public User createUser(User user) {
 
+        System.out.println("USERNAME: " + user.getUsername());
+        System.out.println("EMAIL: " + user.getEmail());
+        System.out.println("PASSWORD RECEIVED: " +
+                (user.getPassword() == null ? "NULL" : "YES"));
+
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already registered");
         }
@@ -34,6 +39,9 @@ public class UserService {
                 passwordEncoder.encode(user.getPassword());
 
         user.setPassword(encodedPassword);
+
+        System.out.println("PASSWORD AFTER ENCODING: " +
+                (user.getPassword() == null ? "NULL" : "YES"));
 
         return userRepository.save(user);
     }
